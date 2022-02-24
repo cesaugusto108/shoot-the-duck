@@ -3,13 +3,16 @@
 const target = document.getElementById("target");
 
 const showTarget = function () {
-      const side = () => Math.trunc((Math.random() * 6 + 4) * 10);
-      const positionX = () => Math.trunc(Math.random() * 100 + 1);
-      const positionY = () => Math.trunc(Math.random() * 100 + 1);
+      const size = () => Math.trunc((Math.random() * 6 + 4) * 10);
+      const positionY = () => Math.trunc(Math.random() * 50 + 1);
+      const positionX = () => {
+            if (window.visualViewport.width < 460) return Math.trunc(Math.random() * 70 + 1);
+            else return Math.trunc(Math.random() * 90 + 1);
+      }
 
-      const height = side();
-      const left = Math.abs(positionX() - height);
-      const top = Math.abs(positionY() - height) / 2;
+      const height = size();
+      const left = positionX();
+      const top = positionY();
 
       target.style.display = "block";
       target.style.height = `${height}px`;
@@ -17,16 +20,12 @@ const showTarget = function () {
       target.style.top = `${top}vh`;
 
       const rotateY = () => {
-            if ((top > positionY() * 0.15 && top < positionY() * 0.4) || (top > positionY() * 0.65 && top < positionY() * 0.9)) {
-                  // transform: rotateY(180deg);
-                  target.style.transform = "rotateY(180deg)";
-            } else {
-                  target.style.transform = "rotateY(0deg)";
-            }
+            if ((top > positionY() * 0.15 && top < positionY() * 0.4) || (top > positionY() * 0.65 && top < positionY() * 0.9)) target.style.transform = "rotateY(180deg)";
+            else target.style.transform = "rotateY(0deg)";
       };
       rotateY();
 };
 
 setInterval(() => {
       showTarget();
-}, 1000);
+}, 600);
