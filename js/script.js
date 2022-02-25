@@ -8,24 +8,38 @@ const showTarget = function () {
       const positionX = () => {
             if (window.visualViewport.width < 460) return Math.trunc(Math.random() * 70 + 1);
             else return Math.trunc(Math.random() * 90 + 1);
-      }
-
-      const height = size();
-      const left = positionX();
-      const top = positionY();
+      };
 
       target.style.display = "block";
-      target.style.height = `${height}px`;
-      target.style.left = `${left}vw`;
-      target.style.top = `${top}vh`;
+      target.style.height = `${size()}px`;
+      target.style.left = `${positionX()}vw`;
+      target.style.top = `${positionY()}vh`;
 
-      const rotateY = () => {
-            if (height % 2 === 0) target.style.transform = "rotateY(180deg)";
-            else target.style.transform = "rotateY(0deg)";
+      const rotate = () => {
+            switch (Math.trunc(Math.random() * 6)) {
+                  case 0:
+                        target.style.transform = "rotateY(0deg) rotateZ(0deg)";
+                        break;
+                  case 1:
+                        target.style.transform = "rotateY(0deg) rotateZ(15deg)";
+                        break;
+                  case 2:
+                        target.style.transform = "rotateY(0deg) rotateZ(345deg)";
+                        break;
+                  case 3:
+                        target.style.transform = "rotateY(180deg) rotateZ(0deg)";
+                        break;
+                  case 4:
+                        target.style.transform = "rotateY(180deg) rotateZ(15deg)";
+                        break;
+                  case 5:
+                        target.style.transform = "rotateY(180deg) rotateZ(345deg)";
+                        break;
+            }
       };
-      rotateY();
+      rotate();
 };
 
 setInterval(() => {
       showTarget();
-}, 600);
+}, 1600);
