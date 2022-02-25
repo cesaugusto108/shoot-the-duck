@@ -20,7 +20,7 @@ const showTarget = function () {
       target.style.top = `${top}vh`;
 
       const rotateY = () => {
-            if ((top > positionY() * 0.15 && top < positionY() * 0.4) || (top > positionY() * 0.65 && top < positionY() * 0.9)) target.style.transform = "rotateY(180deg)";
+            if (height % 2 === 0) target.style.transform = "rotateY(180deg)";
             else target.style.transform = "rotateY(0deg)";
       };
       rotateY();
