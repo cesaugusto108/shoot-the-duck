@@ -2,6 +2,13 @@
 
 const target = document.getElementById("target");
 
+const gameStats = {
+	score: 0,
+	lives: 5,
+	points: 0,
+	sequence: 0,
+};
+
 const showTarget = function () {
 	const size = () => Math.trunc((Math.random() * 6 + 4) * 10);
 	const positionY = () => Math.trunc(Math.random() * 50 + 1);
