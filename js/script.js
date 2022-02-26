@@ -51,6 +51,8 @@ function showTarget() {
 }
 
 function eliminateTarget() {
+      const quack = new Audio("assets/sounds/quack.mp3");
+      quack.play();
       target.style.mixBlendMode = "screen";
       gameStats.score += 10;
       gameStats.lives += 1;
