@@ -7,15 +7,17 @@ const gameStats = {
       score: 0,
       lives: 5,
       onSequence: false,
-      shotBirdsInSequence: 0,
+      shotBirdsInSequence: 0
 };
 
-const showTarget = function () {
+function showTarget() {
       const size = () => Math.trunc((Math.random() * 6 + 4) * 10);
       const positionY = () => Math.trunc(Math.random() * 50 + 1);
       const positionX = () => {
-            if (window.visualViewport.width < 460) return Math.trunc(Math.random() * 70 + 1);
-            else return Math.trunc(Math.random() * 90 + 1);
+            if (window.visualViewport.width < 460)
+                  return Math.trunc(Math.random() * 70 + 1);
+            else
+                  return Math.trunc(Math.random() * 90 + 1);
       };
 
       target.style.display = "block";
@@ -24,7 +26,7 @@ const showTarget = function () {
       target.style.left = `${positionX()}vw`;
       target.style.top = `${positionY()}vh`;
 
-      const rotate = () => {
+      function rotate() {
             switch (Math.trunc(Math.random() * 6)) {
                   case 0:
                         target.style.transform = "rotateY(0deg) rotateZ(0deg)";
@@ -45,19 +47,19 @@ const showTarget = function () {
                         target.style.transform = "rotateY(180deg) rotateZ(345deg)";
                         break;
             }
-      };
+      }
       rotate();
-};
+}
 
-const eliminateTarget = function () {
+function eliminateTarget() {
       target.style.mixBlendMode = "screen";
       gameStats.score += 10;
       gameStats.lives += 1;
       gameStats.onSequence = true;
-};
+}
 
 function gameRun() {
-      setInterval(() => {
+      const targetInterval = setInterval(() => {
             showTarget();
             target.addEventListener("click", eliminateTarget);
 
@@ -75,8 +77,14 @@ function gameRun() {
 
             console.log("score " + gameStats.score, "shotBirdsInSequence " + gameStats.shotBirdsInSequence, "lives " + gameStats.lives);
             
+            if (gameStats.lives === 0) {
+                  clearInterval(targetInterval);
+                  console.log("Game over!");
+            }
+
             gameStats.lives -= 1;
       }, 1600);
+
 }
 
 gameRun();
