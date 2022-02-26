@@ -5,12 +5,12 @@ const background = document.querySelector(".game-background");
 
 let count = 0;
 
-const cocking = new Audio("assets/sounds/cocking.mp3");
+const reload = new Audio("assets/sounds/reload.mp3");
 const shot = new Audio("assets/sounds/shot.mp3");
 
 const gameStats = {
       score: 0,
-      lives: 5,
+      lives: 3,
       onSequence: false,
       shotBirdsInSequence: 0,
       timeLeft: 60,
@@ -65,7 +65,7 @@ function eliminateTarget() {
 }
 
 function shoot() {
-      cocking.play();
+      reload.play();
       shot.play();
 }
 
@@ -89,7 +89,7 @@ function gameRun() {
                   count = 0;
             }
 
-            if (gameStats.lives < 5 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) gameStats.lives += 1;
+            if (gameStats.lives < 3 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) gameStats.lives += 1;
 
             console.log("score " + gameStats.score, "shotBirdsInSequence " + gameStats.shotBirdsInSequence, "lives " + gameStats.lives);
 

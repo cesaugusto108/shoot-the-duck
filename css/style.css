@@ -1,4 +1,6 @@
 body {
+      color: #FFF;
+      font-family: 'Special Elite', cursive;
       overflow: hidden;
       cursor: url(/assets/img/crosshair.png) 30 30, auto;
 }
@@ -10,6 +12,51 @@ body {
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+}
+
+.game-panel {
+      background-image: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0.5));
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 -3px 10px #000;
+      cursor: default;
+}
+
+.game-panel h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.6rem;
+      text-shadow: 3px 3px #000;
+}
+
+.game-panel h2 {
+      font-size: 1.2rem;
+}
+
+.game-panel h3 {
+      font-size: 1rem;
+}
+
+.heart {
+      font-size: 1.5rem;
+      text-align: center;
+}
+
+.options button {
+      background-color: transparent;
+      border: none;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      font-weight: bold;
+      font-family: 'Fredoka One', cursive;
+      color: yellow;
+}
+
+.options button:active {
+      text-shadow: 1px 1px 7px yellow;
 }
 
 #target {
