@@ -6,6 +6,7 @@ body {
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+      cursor: url(/assets/img/hair.png) 30 30, auto;
 }
 
 #target {
