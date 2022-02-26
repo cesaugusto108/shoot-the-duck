@@ -2,7 +2,11 @@
 
 const target = document.getElementById("target");
 const background = document.querySelector(".game-background");
+
 let count = 0;
+
+const cocking = new Audio("assets/sounds/cocking.mp3");
+const shot = new Audio("assets/sounds/shot.mp3");
 
 const gameStats = {
       score: 0,
@@ -61,7 +65,7 @@ function eliminateTarget() {
 }
 
 function shoot() {
-      const shot = new Audio("assets/sounds/shotgun.mp3");
+      cocking.play();
       shot.play();
 }
 
