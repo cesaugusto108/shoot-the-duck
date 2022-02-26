@@ -59,6 +59,19 @@ body {
       text-shadow: 1px 1px 7px yellow;
 }
 
+.massacre, .double_massacre {
+      text-align: center;
+      font-size: 4rem;
+      font-family: 'Barriecito', cursive;
+      color: orangered;
+      text-shadow: 2px 2px #000;
+      display: none;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+}
+
 #target {
       position: absolute;
       display: none;

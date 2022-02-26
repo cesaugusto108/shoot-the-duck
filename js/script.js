@@ -2,6 +2,8 @@
 
 const target = document.getElementById("target");
 const background = document.querySelector(".game-background");
+const massacre = document.querySelector(".massacre");
+const doubleMassacre = document.querySelector(".double_massacre");
 
 let count = 0;
 
@@ -58,6 +60,20 @@ function showTarget() {
 function eliminateTarget() {
       const quack = new Audio("assets/sounds/quack.mp3");
       quack.play();
+
+      if (gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 20 === 0) {
+            doubleMassacre.style.display = "block";
+            const laugh2 = new Audio("assets/sounds/laugh2.mp3");
+            laugh2.play();
+      } else if (gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) {
+            massacre.style.display = "block";
+            const laugh1 = new Audio("assets/sounds/laugh1.mp3");
+            laugh1.play();
+      } else if (gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 9 === 0) {
+            const celebrate = new Audio("assets/sounds/celebrate.mp3");
+            celebrate.play();
+      }
+
       target.style.mixBlendMode = "screen";
       gameStats.score += 10;
       gameStats.lives += 1;
@@ -78,7 +94,11 @@ function gameRun() {
       }, 1000);
 
       const targetInterval = setInterval(() => {
+            massacre.style.display = "none";
+            doubleMassacre.style.display = "none";
+
             showTarget();
+
             target.addEventListener("click", eliminateTarget);
 
             if (gameStats.onSequence !== false) {
