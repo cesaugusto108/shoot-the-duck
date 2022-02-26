@@ -85,6 +85,12 @@ function gameRun() {
                   target.style.display = "none";
                   console.log("Game over!");
             }
+            else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
+                  clearInterval(targetInterval);
+                  clearInterval(timeCountdown);
+                  target.style.display = "none";
+                  console.log("Você venceu!");
+            }
 
             gameStats.onSequence = false;
             gameStats.lives -= 1;
