@@ -7,17 +7,16 @@ const gameStats = {
       score: 0,
       lives: 5,
       onSequence: false,
-      shotBirdsInSequence: 0
+      shotBirdsInSequence: 0,
+      timeLeft: 60,
 };
 
 function showTarget() {
       const size = () => Math.trunc((Math.random() * 6 + 4) * 10);
       const positionY = () => Math.trunc(Math.random() * 50 + 1);
       const positionX = () => {
-            if (window.visualViewport.width < 460)
-                  return Math.trunc(Math.random() * 70 + 1);
-            else
-                  return Math.trunc(Math.random() * 90 + 1);
+            if (window.visualViewport.width < 460) return Math.trunc(Math.random() * 70 + 1);
+            else return Math.trunc(Math.random() * 90 + 1);
       };
 
       target.style.display = "block";
@@ -59,6 +58,11 @@ function eliminateTarget() {
 }
 
 function gameRun() {
+      const timeCountdown = setInterval(() => {
+            gameStats.timeLeft -= 1;
+            console.log(gameStats.timeLeft);
+      }, 1000);
+
       const targetInterval = setInterval(() => {
             showTarget();
             target.addEventListener("click", eliminateTarget);
@@ -73,18 +77,17 @@ function gameRun() {
 
             if (gameStats.lives < 5 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) gameStats.lives += 1;
 
-            gameStats.onSequence = false;
-
             console.log("score " + gameStats.score, "shotBirdsInSequence " + gameStats.shotBirdsInSequence, "lives " + gameStats.lives);
             
             if (gameStats.lives === 0) {
                   clearInterval(targetInterval);
+                  clearInterval(timeCountdown);
                   console.log("Game over!");
             }
-
+                        
+            gameStats.onSequence = false;
             gameStats.lives -= 1;
-      }, 1600);
-
+      }, 1500);
 }
 
 gameRun();
