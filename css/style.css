@@ -1,12 +1,15 @@
 body {
+      overflow: hidden;
+      cursor: url(/assets/img/crosshair.png) 30 30, auto;
+}
+
+.game-background {
       height: 100vh;
       width: 100vw;
-      overflow: hidden;
       background-image: url(../assets/img/background.jpg);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      cursor: url(/assets/img/crosshair.png) 30 30, auto;
 }
 
 #target {

@@ -1,6 +1,7 @@
 "use strict";
 
 const target = document.getElementById("target");
+const background = document.querySelector(".game-background");
 let count = 0;
 
 const gameStats = {
@@ -59,7 +60,14 @@ function eliminateTarget() {
       gameStats.onSequence = true;
 }
 
+function shoot() {
+      const shot = new Audio("assets/sounds/shotgun.mp3");
+      shot.play();
+}
+
 function gameRun() {
+      background.addEventListener("click", shoot);
+
       const timeCountdown = setInterval(() => {
             gameStats.timeLeft -= 1;
             console.log(gameStats.timeLeft);
@@ -86,8 +94,7 @@ function gameRun() {
                   clearInterval(timeCountdown);
                   target.style.display = "none";
                   console.log("Game over!");
-            }
-            else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
+            } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
                   clearInterval(targetInterval);
                   clearInterval(timeCountdown);
                   target.style.display = "none";
