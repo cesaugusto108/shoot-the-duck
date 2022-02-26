@@ -78,13 +78,14 @@ function gameRun() {
             if (gameStats.lives < 5 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) gameStats.lives += 1;
 
             console.log("score " + gameStats.score, "shotBirdsInSequence " + gameStats.shotBirdsInSequence, "lives " + gameStats.lives);
-            
+
             if (gameStats.lives === 0) {
                   clearInterval(targetInterval);
                   clearInterval(timeCountdown);
+                  target.style.display = "none";
                   console.log("Game over!");
             }
-                        
+
             gameStats.onSequence = false;
             gameStats.lives -= 1;
       }, 1500);
