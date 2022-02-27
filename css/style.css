@@ -76,3 +76,10 @@ body {
       position: absolute;
       display: none;
 }
+
+/* AJUSTE PARA DISPOSITIVO MÓVEL */
+@media (max-width: 540px) {
+      .game-background {
+            background-position: right;
+      }
+}
