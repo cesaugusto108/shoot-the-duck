@@ -5,6 +5,8 @@ const background = document.querySelector(".game-background");
 const time = document.getElementById("time");
 const massacre = document.querySelector(".massacre");
 const doubleMassacre = document.querySelector(".double_massacre");
+const win = document.querySelector(".win");
+const gameOver = document.querySelector(".game-over");
 const heart1 = document.getElementById("heart1");
 const heart2 = document.getElementById("heart2");
 const heart3 = document.getElementById("heart3");
@@ -171,12 +173,12 @@ function gameRun() {
                         clearInterval(targetInterval);
                         clearInterval(timeCountdown);
                         target.style.display = "none";
-                        console.log("Game over!");
+                        gameOver.style.display = "block";
                   } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
                         clearInterval(targetInterval);
                         clearInterval(timeCountdown);
                         target.style.display = "none";
-                        console.log("Você venceu!");
+                        win.style.display = "block";
                   }
             }
             finishGame();
