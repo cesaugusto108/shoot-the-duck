@@ -2,8 +2,14 @@
 
 const target = document.getElementById("target");
 const background = document.querySelector(".game-background");
+const time = document.getElementById("time");
 const massacre = document.querySelector(".massacre");
 const doubleMassacre = document.querySelector(".double_massacre");
+const heart1 = document.getElementById("heart1");
+const heart2 = document.getElementById("heart2");
+const heart3 = document.getElementById("heart3");
+const sequence = document.getElementById("sequence");
+const points = document.getElementById("points");
 
 let count = 0;
 
@@ -90,7 +96,7 @@ function gameRun() {
 
       const timeCountdown = setInterval(() => {
             gameStats.timeLeft -= 1;
-            console.log(gameStats.timeLeft);
+            time.innerText = gameStats.timeLeft;
       }, 1000);
 
       const targetInterval = setInterval(() => {
@@ -109,9 +115,21 @@ function gameRun() {
                   count = 0;
             }
 
-            if (gameStats.lives < 3 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) gameStats.lives += 1;
+            if (gameStats.lives < 3 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) {
+                  gameStats.lives += 1;
 
-            console.log("score " + gameStats.score, "shotBirdsInSequence " + gameStats.shotBirdsInSequence, "lives " + gameStats.lives);
+                  switch (gameStats.lives) {
+                        case 2:
+                              heart2.style.display = "block";
+                              break;
+                        case 3:
+                              heart3.style.display = "block";
+                              break;
+                  }
+            }
+
+            sequence.innerText = gameStats.shotBirdsInSequence;
+            points.innerText = gameStats.score;
 
             if (gameStats.lives === 0) {
                   clearInterval(targetInterval);
@@ -126,6 +144,19 @@ function gameRun() {
             }
 
             gameStats.onSequence = false;
+
+            switch (gameStats.lives) {
+                  case 2:
+                        heart3.style.display = "none";
+                        break;
+                  case 1:
+                        heart2.style.display = "none";
+                        break;
+                  case 0:
+                        heart1.style.display = "none";
+                        break;
+            }
+
             gameStats.lives -= 1;
       }, 1500);
 }
