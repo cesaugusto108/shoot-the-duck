@@ -11,10 +11,11 @@ const heart3 = document.getElementById("heart3");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
 
-let count = 0;
-
 const reload = new Audio("assets/sounds/reload.mp3");
 const shot = new Audio("assets/sounds/shot.mp3");
+
+let count = 0;
+let interval = 1000;
 
 const gameStats = {
       score: 0,
@@ -24,8 +25,9 @@ const gameStats = {
       timeLeft: 60,
 };
 
+// Mostra o alvo na tela
 function showTarget() {
-      const size = () => Math.trunc((Math.random() * 6 + 4) * 10);
+      const size = () => Math.trunc((Math.random() * 6 + 3) * 10);
       const positionY = () => Math.trunc(Math.random() * 50 + 1);
       const positionX = () => {
             if (window.visualViewport.width < 460) return Math.trunc(Math.random() * 70 + 1);
@@ -38,32 +40,35 @@ function showTarget() {
       target.style.left = `${positionX()}vw`;
       target.style.top = `${positionY()}vh`;
 
-      function rotate() {
-            switch (Math.trunc(Math.random() * 6)) {
-                  case 0:
-                        target.style.transform = "rotateY(0deg) rotateZ(0deg)";
-                        break;
-                  case 1:
-                        target.style.transform = "rotateY(0deg) rotateZ(15deg)";
-                        break;
-                  case 2:
-                        target.style.transform = "rotateY(0deg) rotateZ(345deg)";
-                        break;
-                  case 3:
-                        target.style.transform = "rotateY(180deg) rotateZ(0deg)";
-                        break;
-                  case 4:
-                        target.style.transform = "rotateY(180deg) rotateZ(15deg)";
-                        break;
-                  case 5:
-                        target.style.transform = "rotateY(180deg) rotateZ(345deg)";
-                        break;
-            }
-      }
       rotate();
 }
 
-function eliminateTarget() {
+// muda a direção do pato
+function rotate() {
+      switch (Math.trunc(Math.random() * 6)) {
+            case 0:
+                  target.style.transform = "rotateY(0deg) rotateZ(0deg)";
+                  break;
+            case 1:
+                  target.style.transform = "rotateY(0deg) rotateZ(15deg)";
+                  break;
+            case 2:
+                  target.style.transform = "rotateY(0deg) rotateZ(345deg)";
+                  break;
+            case 3:
+                  target.style.transform = "rotateY(180deg) rotateZ(0deg)";
+                  break;
+            case 4:
+                  target.style.transform = "rotateY(180deg) rotateZ(15deg)";
+                  break;
+            case 5:
+                  target.style.transform = "rotateY(180deg) rotateZ(345deg)";
+                  break;
+      }
+}
+
+// reproduz efeitos sonoros
+function playSounds() {
       const quack = new Audio("assets/sounds/quack.mp3");
       quack.play();
 
@@ -79,6 +84,11 @@ function eliminateTarget() {
             const celebrate = new Audio("assets/sounds/celebrate.mp3");
             celebrate.play();
       }
+}
+
+// acerta o alvo
+function eliminateTarget() {
+      playSounds();
 
       target.style.mixBlendMode = "screen";
       gameStats.score += 10;
@@ -86,11 +96,55 @@ function eliminateTarget() {
       gameStats.onSequence = true;
 }
 
+// reproduz o tiro
 function shoot() {
       reload.play();
       shot.play();
 }
 
+// checa se o jogo está numa sequência de acertos
+function checkSequence() {
+      if (gameStats.onSequence !== false) {
+            count += 1;
+            gameStats.shotBirdsInSequence = count;
+      } else {
+            gameStats.shotBirdsInSequence = 0;
+            count = 0;
+      }
+}
+
+// recupera vidas
+function recoverLives() {
+      if (gameStats.lives < 3 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) {
+            gameStats.lives += 1;
+
+            switch (gameStats.lives) {
+                  case 2:
+                        heart2.style.display = "block";
+                        break;
+                  case 3:
+                        heart3.style.display = "block";
+                        break;
+            }
+      }
+}
+
+// apaga os corações (vidas) na tela
+function hideHearts() {
+      switch (gameStats.lives) {
+            case 2:
+                  heart3.style.display = "none";
+                  break;
+            case 1:
+                  heart2.style.display = "none";
+                  break;
+            case 0:
+                  heart1.style.display = "none";
+                  break;
+      }
+}
+
+// roda o jogo
 function gameRun() {
       background.addEventListener("click", shoot);
 
@@ -104,61 +158,35 @@ function gameRun() {
             doubleMassacre.style.display = "none";
 
             showTarget();
-
             target.addEventListener("click", eliminateTarget);
-
-            if (gameStats.onSequence !== false) {
-                  count += 1;
-                  gameStats.shotBirdsInSequence = count;
-            } else {
-                  gameStats.shotBirdsInSequence = 0;
-                  count = 0;
-            }
-
-            if (gameStats.lives < 3 && gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) {
-                  gameStats.lives += 1;
-
-                  switch (gameStats.lives) {
-                        case 2:
-                              heart2.style.display = "block";
-                              break;
-                        case 3:
-                              heart3.style.display = "block";
-                              break;
-                  }
-            }
+            checkSequence();
+            recoverLives();
 
             sequence.innerText = gameStats.shotBirdsInSequence;
             points.innerText = gameStats.score;
 
-            if (gameStats.lives === 0) {
-                  clearInterval(targetInterval);
-                  clearInterval(timeCountdown);
-                  target.style.display = "none";
-                  console.log("Game over!");
-            } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
-                  clearInterval(targetInterval);
-                  clearInterval(timeCountdown);
-                  target.style.display = "none";
-                  console.log("Você venceu!");
+            // encerra o jogo com vitória ou derrota
+            function finishGame() {
+                  if (gameStats.lives === 0) {
+                        clearInterval(targetInterval);
+                        clearInterval(timeCountdown);
+                        target.style.display = "none";
+                        console.log("Game over!");
+                  } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
+                        clearInterval(targetInterval);
+                        clearInterval(timeCountdown);
+                        target.style.display = "none";
+                        console.log("Você venceu!");
+                  }
             }
+            finishGame();
 
             gameStats.onSequence = false;
 
-            switch (gameStats.lives) {
-                  case 2:
-                        heart3.style.display = "none";
-                        break;
-                  case 1:
-                        heart2.style.display = "none";
-                        break;
-                  case 0:
-                        heart1.style.display = "none";
-                        break;
-            }
+            hideHearts();
 
             gameStats.lives -= 1;
-      }, 1500);
+      }, interval);
 }
 
 gameRun();
