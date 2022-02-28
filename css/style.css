@@ -40,9 +40,19 @@ body {
       font-size: 1rem;
 }
 
+.hearts {
+      display: flex;
+}
+
 .heart {
       font-size: 1.5rem;
       text-align: center;
+}
+
+.infinite-mode {
+      font-family: 'Fredoka One', cursive;
+      color: orange;
+      display: none;
 }
 
 .options button {

@@ -3,13 +3,16 @@
 const target = document.getElementById("target");
 const background = document.querySelector(".game-background");
 const time = document.getElementById("time");
+const timeHeader = document.getElementById("time-header");
 const massacre = document.querySelector(".massacre");
 const doubleMassacre = document.querySelector(".double_massacre");
 const win = document.querySelector(".win");
 const gameOver = document.querySelector(".game-over");
+const hearts = document.querySelector(".hearts");
 const heart1 = document.getElementById("heart1");
 const heart2 = document.getElementById("heart2");
 const heart3 = document.getElementById("heart3");
+const infiniteModeMessage = document.querySelector(".infinite-mode");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
 
@@ -25,6 +28,7 @@ const gameStats = {
       onSequence: false,
       shotBirdsInSequence: 0,
       timeLeft: 60,
+      infiniteMode: false,
 };
 
 // Mostra o alvo na tela
@@ -146,8 +150,17 @@ function hideHearts() {
       }
 }
 
+// modo infinito
+function infiniteModeOn() {
+      hearts.style.display = "none";
+      timeHeader.style.display = "none";
+      infiniteModeMessage.style.display = "block";
+}
+
 // roda o jogo
 function gameRun() {
+      if (gameStats.infiniteMode === true) infiniteModeOn();
+
       background.addEventListener("click", shoot);
 
       const timeCountdown = setInterval(() => {
@@ -169,23 +182,25 @@ function gameRun() {
 
             // encerra o jogo com vitória ou derrota
             function finishGame() {
-                  if (gameStats.lives === 0) {
-                        clearInterval(targetInterval);
-                        clearInterval(timeCountdown);
-                        target.style.display = "none";
-                        gameOver.style.display = "block";
-                  } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
-                        clearInterval(targetInterval);
-                        clearInterval(timeCountdown);
-                        target.style.display = "none";
-                        win.style.display = "block";
+                  if (gameStats.infiniteMode === false) {
+                        if (gameStats.lives === 0) {
+                              clearInterval(targetInterval);
+                              clearInterval(timeCountdown);
+                              target.style.display = "none";
+                              gameOver.style.display = "block";
+                        } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
+                              clearInterval(targetInterval);
+                              clearInterval(timeCountdown);
+                              target.style.display = "none";
+                              win.style.display = "block";
+                        }
                   }
             }
             finishGame();
 
             gameStats.onSequence = false;
 
-            hideHearts();
+            if (gameStats.infiniteMode === false) hideHearts();
 
             gameStats.lives -= 1;
       }, interval);
