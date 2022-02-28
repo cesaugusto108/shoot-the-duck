@@ -28,7 +28,7 @@ const gameStats = {
       onSequence: false,
       shotBirdsInSequence: 0,
       timeLeft: 60,
-      infiniteMode: false,
+      infiniteMode: true,
 };
 
 // Mostra o alvo na tela
@@ -96,7 +96,7 @@ function playSounds() {
 function eliminateTarget() {
       playSounds();
 
-      target.style.mixBlendMode = "screen";
+      target.style.mixBlendMode = "color-burn";
       gameStats.score += 10;
       gameStats.lives += 1;
       gameStats.onSequence = true;
