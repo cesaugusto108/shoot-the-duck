@@ -26,7 +26,7 @@ body {
       cursor: default;
 }
 
-.game-panel h1 {
+.game-panel h1, .game-options h1 {
       font-family: 'Press Start 2P', cursive;
       font-size: 1.6rem;
       text-shadow: 3px 3px #000;
@@ -80,6 +80,81 @@ body {
       top: 30%;
       left: 50%;
       transform: translateX(-50%);
+}
+
+.game-options {
+      background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgba(0, 0, 0, 0.5));
+      box-shadow: 0 3px 10px #000, 0 -3px 10px #000;
+      border-radius: 10px;
+      padding: 30px;
+      cursor: default;
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+}
+
+.game-options-img {
+      position: relative;
+}
+
+#duck-img {
+      height: 90px;
+}
+
+#crosshair-img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.5);
+}
+
+.game-options select {
+      width: 70%;
+      text-transform: uppercase;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+}
+
+.game-options-buttons {
+      display: flex;
+      flex-direction: column;
+      margin: 30px 0;
+}
+
+.game-options-buttons button, .help {
+      outline: none;
+      padding: 15px 30px;
+      border-radius: 2px;
+}
+
+.game-options-buttons button:focus, .help:focus {
+      background-color: #222;
+}
+
+.options-button {
+      border: none;
+      background-color: transparent;
+      font-family: 'Fredoka One', cursive;
+      font-size: 2rem;
+      color: yellow;
+}
+
+#start, #restart, #continue {
+      display: none;
+}
+
+.help {
+      border: none;
+      background-color: transparent;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: greenyellow;
+      padding: 15px 30px;
+      margin: 20px 0;
 }
 
 #target {

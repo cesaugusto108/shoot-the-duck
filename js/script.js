@@ -28,7 +28,7 @@ const gameStats = {
       onSequence: false,
       shotBirdsInSequence: 0,
       timeLeft: 60,
-      infiniteMode: true,
+      infiniteMode: false,
 };
 
 // Mostra o alvo na tela
