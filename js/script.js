@@ -20,11 +20,15 @@ const heart3 = document.getElementById("heart3");
 const infiniteModeMessage = document.querySelector(".infinite-mode");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
-const start = document.getElementById("start");
+const startBtn = document.getElementById("start");
+const restartBtn = document.getElementById("restart");
+const continueBtn = document.getElementById("continue");
+const buttons = document.querySelectorAll("button");
 
 const reload = new Audio("assets/sounds/reload.mp3");
 const shot = new Audio("assets/sounds/shot.mp3");
 const gameStartSound = new Audio("assets/sounds/game-start.wav");
+const buttonSound = new Audio("assets/sounds/button.wav");
 
 let count = 0;
 let interval = 1000;
@@ -49,6 +53,14 @@ function gameStartSoundPlay(mode) {
       else gameStartSound.pause();
 }
 
+// toca o som dos botões
+function buttonSoundPlay() {
+      const playButtonSound = () => buttonSound.play();
+      buttons.forEach(button => {
+            button.addEventListener("click", playButtonSound);
+      });
+}
+
 // carrega tela principal do jogo
 function gameLoad() {
       if (this.id === "yes") gameSettings.soundOn = true;
@@ -60,6 +72,7 @@ function gameLoad() {
       }, 3000);
       background.style.display = "block";
       gameOptions.style.display = "flex";
+      if (gameSettings.soundOn === true) buttonSoundPlay();
 }
 
 // Mostra o alvo na tela
@@ -243,4 +256,4 @@ function gameRun() {
 
 yes.addEventListener("click", gameLoad);
 no.addEventListener("click", gameLoad);
-start.addEventListener("click", gameRun);
+startBtn.addEventListener("click", gameRun);
