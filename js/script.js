@@ -34,6 +34,7 @@ const shot = new Audio("assets/sounds/shot.mp3");
 const gameStartSound = new Audio("assets/sounds/game-start.wav");
 const buttonSound = new Audio("assets/sounds/button.wav");
 const gameOverSound = new Audio("assets/sounds/game-over.mp3");
+const victorySound = new Audio("assets/sounds/victory.mp3");
 
 let count = 0;
 let interval = 1000;
@@ -318,6 +319,7 @@ function gameRun() {
                               target.style.display = "none";
                               win.style.display = "block";
                               gameStats.gameOnProgress = false;
+                              if (gameSettings.soundOn === true) victorySound.play();
                         }
                   }
             }
