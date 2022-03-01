@@ -26,6 +26,7 @@ const optionsBtn = document.getElementById("options-button");
 const startBtn = document.getElementById("start");
 const restartBtn = document.getElementById("restart");
 const continueBtn = document.getElementById("continue");
+const reloadBtn = document.getElementById("reload");
 const buttons = document.querySelectorAll("button");
 
 const reload = new Audio("assets/sounds/reload.mp3");
@@ -80,6 +81,7 @@ function gameLoad() {
       background.style.opacity = "0.4";
       gameOptions.style.display = "flex";
       if (gameSettings.soundOn === true) buttonSoundPlay();
+      reloadBtn.addEventListener("click", reloadGame);
 }
 
 // reinicia o jogo
@@ -96,6 +98,11 @@ function gameRestart() {
       win.style.display = "none";
 
       gameRun();
+}
+
+// recarrega o jogo a partir da primeira tela
+function reloadGame() {
+      window.location.reload();
 }
 
 // carrega tela de opções durante o jogo
