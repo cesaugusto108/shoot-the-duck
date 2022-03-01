@@ -28,9 +28,10 @@ const gameStartSound = new Audio("assets/sounds/game-start.wav");
 
 let count = 0;
 let interval = 1000;
+let gameStartSoundPlayRepeat = null;
 
 const gameSettings = {
-      soundOn: false,
+      soundOn: true,
       infiniteMode: false,
 };
 
@@ -42,12 +43,18 @@ const gameStats = {
       timeLeft: 60,
 };
 
+// toca o som inicial da tela de apresentação
+function gameStartSoundPlay(mode) {
+      if (mode === true) gameStartSound.play();
+      else gameStartSound.pause();
+}
+
 // carrega tela principal do jogo
 function gameLoad() {
       gameInitial.style.display = "none";
-      gameStartSound.play();
-      setInterval(() => {
-            gameStartSound.play();
+      if (gameSettings.soundOn === true) gameStartSoundPlay(true);
+      gameStartSoundPlayRepeat = setInterval(() => {
+            if (gameSettings.soundOn === true) gameStartSoundPlay(true);
       }, 3000);
       background.style.display = "block";
       gameOptions.style.display = "flex";
@@ -98,19 +105,19 @@ function rotate() {
 // reproduz efeitos sonoros
 function playSounds() {
       const quack = new Audio("assets/sounds/quack.mp3");
-      quack.play();
+      if (gameSettings.soundOn === true) quack.play();
 
       if (gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 20 === 0) {
             doubleMassacre.style.display = "block";
             const laugh2 = new Audio("assets/sounds/laugh2.mp3");
-            laugh2.play();
+            if (gameSettings.soundOn === true) laugh2.play();
       } else if (gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 10 === 0) {
             massacre.style.display = "block";
             const laugh1 = new Audio("assets/sounds/laugh1.mp3");
-            laugh1.play();
+            if (gameSettings.soundOn === true) laugh1.play();
       } else if (gameStats.shotBirdsInSequence !== 0 && gameStats.shotBirdsInSequence % 9 === 0) {
             const celebrate = new Audio("assets/sounds/celebrate.mp3");
-            celebrate.play();
+            if (gameSettings.soundOn === true) celebrate.play();
       }
 }
 
@@ -126,8 +133,8 @@ function eliminateTarget() {
 
 // reproduz o tiro
 function shoot() {
-      reload.play();
-      shot.play();
+      if (gameSettings.soundOn === true) reload.play();
+      if (gameSettings.soundOn === true) shot.play();
 }
 
 // checa se o jogo está numa sequência de acertos
@@ -181,6 +188,8 @@ function infiniteModeOn() {
 
 // roda o jogo
 function gameRun() {
+      clearInterval(gameStartSoundPlayRepeat);
+      gameStartSoundPlay(false);
       gamePanel.style.display = "flex";
       gameOptions.style.display = "none";
       if (gameSettings.infiniteMode === true) infiniteModeOn();

@@ -3,7 +3,6 @@ body {
       color: #FFF;
       font-family: 'Special Elite', cursive;
       overflow: hidden;
-      cursor: url(/assets/img/crosshair.png) 30 30, auto;
 }
 
 .game-initial {
@@ -36,6 +35,7 @@ body {
       display: none;
       height: 100vh;
       width: 100vw;
+      cursor: url(../assets/img/crosshair.png) 30 30, auto;
       background-image: url(../assets/img/background.jpg);
       background-position: center;
       background-repeat: no-repeat;
