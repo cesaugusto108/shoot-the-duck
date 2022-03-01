@@ -45,6 +45,7 @@ const gameSettings = {
 };
 
 const gameStats = {
+      gameOnProgress: false,
       score: 0,
       lives: 3,
       onSequence: false,
@@ -113,7 +114,7 @@ function gameOptionsLoad() {
       formSwitch.style.display = "none";
       startBtn.style.display = "none";
       restartBtn.style.display = "block";
-      continueBtn.style.display = "block";
+      if (gameStats.gameOnProgress === true) continueBtn.style.display = "block";
 
       restartBtn.addEventListener("click", gameRestart);
       continueBtn.addEventListener("click", gameRun);
@@ -254,13 +255,16 @@ function infiniteModeOff() {
 
 // roda o jogo
 function gameRun() {
+      gameStats.gameOnProgress = true;
       clearInterval(gameStartSoundPlayRepeat);
       gameStartSoundPlay(false);
-
+      
       gamePanel.style.display = "flex";
       gameOptions.style.display = "none";
       background.style.opacity = "1";
       time.innerText = 60;
+      continueBtn.style.display = "none";
+
       optionsBtn.addEventListener("click", gameOptionsLoad);
 
       if (infiniteModeSwitch.checked === true) {
@@ -298,11 +302,13 @@ function gameRun() {
                               clearInterval(timeCountdown);
                               target.style.display = "none";
                               gameOver.style.display = "block";
+                              gameStats.gameOnProgress = false;
                         } else if (gameStats.timeLeft === 0 && gameStats.lives > 0) {
                               clearInterval(targetInterval);
                               clearInterval(timeCountdown);
                               target.style.display = "none";
                               win.style.display = "block";
+                              gameStats.gameOnProgress = false;
                         }
                   }
             }
