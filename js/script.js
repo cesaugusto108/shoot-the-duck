@@ -34,7 +34,7 @@ const closeHelp = document.getElementById("close-help");
 
 const reload = new Audio("assets/sounds/reload.mp3");
 const shot = new Audio("assets/sounds/shot.mp3");
-const gameStartSound = new Audio("assets/sounds/game-start.wav");
+const gameStartSound = new Audio("assets/sounds/game-start.mp3");
 const buttonSound = new Audio("assets/sounds/button.wav");
 const gameOverSound = new Audio("assets/sounds/game-over.mp3");
 const victorySound = new Audio("assets/sounds/victory.mp3");
