@@ -172,12 +172,24 @@ label {
       background-color: transparent;
       font-family: "Fredoka One", cursive;
       font-size: 2rem;
-      color: yellow;
+      text-shadow: 1px 1px 15px #000;
 }
 
 #restart,
 #continue {
       display: none;
+}
+
+#start {
+      color: yellow;
+}
+
+#restart {
+      color: orangered;
+}
+
+#continue {
+      color: yellowgreen;
 }
 
 .help {
