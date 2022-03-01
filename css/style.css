@@ -167,6 +167,14 @@ label {
       background-color: #222;
 }
 
+.options-button {
+      border: none;
+      background-color: transparent;
+      font-family: "Fredoka One", cursive;
+      font-size: 1.7rem;
+      text-shadow: 1px 1px 15px #000;
+}
+
 #restart,
 #continue {
       display: none;
