@@ -1,5 +1,8 @@
 "use strict";
 
+const gameInitial = document.querySelector(".game-initial");
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
 const target = document.getElementById("target");
 const background = document.querySelector(".game-background");
 const time = document.getElementById("time");
@@ -8,6 +11,8 @@ const massacre = document.querySelector(".massacre");
 const doubleMassacre = document.querySelector(".double_massacre");
 const win = document.querySelector(".win");
 const gameOver = document.querySelector(".game-over");
+const gamePanel = document.querySelector(".game-panel");
+const gameOptions = document.querySelector(".game-options");
 const hearts = document.querySelector(".hearts");
 const heart1 = document.getElementById("heart1");
 const heart2 = document.getElementById("heart2");
@@ -15,12 +20,19 @@ const heart3 = document.getElementById("heart3");
 const infiniteModeMessage = document.querySelector(".infinite-mode");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
+const start = document.getElementById("start");
 
 const reload = new Audio("assets/sounds/reload.mp3");
 const shot = new Audio("assets/sounds/shot.mp3");
+const gameStartSound = new Audio("assets/sounds/game-start.wav");
 
 let count = 0;
 let interval = 1000;
+
+const gameSettings = {
+      soundOn: false,
+      infiniteMode: false,
+};
 
 const gameStats = {
       score: 0,
@@ -28,8 +40,18 @@ const gameStats = {
       onSequence: false,
       shotBirdsInSequence: 0,
       timeLeft: 60,
-      infiniteMode: false,
 };
+
+// carrega tela principal do jogo
+function gameLoad() {
+      gameInitial.style.display = "none";
+      gameStartSound.play();
+      setInterval(() => {
+            gameStartSound.play();
+      }, 3000);
+      background.style.display = "block";
+      gameOptions.style.display = "flex";
+}
 
 // Mostra o alvo na tela
 function showTarget() {
@@ -159,7 +181,9 @@ function infiniteModeOn() {
 
 // roda o jogo
 function gameRun() {
-      if (gameStats.infiniteMode === true) infiniteModeOn();
+      gamePanel.style.display = "flex";
+      gameOptions.style.display = "none";
+      if (gameSettings.infiniteMode === true) infiniteModeOn();
 
       background.addEventListener("click", shoot);
 
@@ -182,7 +206,7 @@ function gameRun() {
 
             // encerra o jogo com vitória ou derrota
             function finishGame() {
-                  if (gameStats.infiniteMode === false) {
+                  if (gameSettings.infiniteMode === false) {
                         if (gameStats.lives === 0) {
                               clearInterval(targetInterval);
                               clearInterval(timeCountdown);
@@ -200,10 +224,12 @@ function gameRun() {
 
             gameStats.onSequence = false;
 
-            if (gameStats.infiniteMode === false) hideHearts();
+            if (gameSettings.infiniteMode === false) hideHearts();
 
             gameStats.lives -= 1;
       }, interval);
 }
 
-gameRun();
+yes.addEventListener("click", gameLoad);
+no.addEventListener("click", gameLoad);
+start.addEventListener("click", gameRun);
