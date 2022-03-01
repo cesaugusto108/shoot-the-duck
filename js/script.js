@@ -18,6 +18,7 @@ const hearts = document.querySelector(".hearts");
 const heart1 = document.getElementById("heart1");
 const heart2 = document.getElementById("heart2");
 const heart3 = document.getElementById("heart3");
+const formSwitch = document.querySelector(".form-switch");
 const infiniteModeMessage = document.querySelector(".infinite-mode");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
@@ -109,11 +110,13 @@ function gameOptionsLoad() {
       gamePanel.style.display = "none";
       background.style.opacity = "0.4";
       gameOptions.style.display = "flex";
+      formSwitch.style.display = "none";
       startBtn.style.display = "none";
       restartBtn.style.display = "block";
       continueBtn.style.display = "block";
 
       restartBtn.addEventListener("click", gameRestart);
+      continueBtn.addEventListener("click", gameRun);
 }
 
 // Mostra o alvo na tela
