@@ -31,7 +31,7 @@ let interval = 1000;
 let gameStartSoundPlayRepeat = null;
 
 const gameSettings = {
-      soundOn: true,
+      soundOn: false,
       infiniteMode: false,
 };
 
@@ -51,6 +51,8 @@ function gameStartSoundPlay(mode) {
 
 // carrega tela principal do jogo
 function gameLoad() {
+      if (this.id === "yes") gameSettings.soundOn = true;
+
       gameInitial.style.display = "none";
       if (gameSettings.soundOn === true) gameStartSoundPlay(true);
       gameStartSoundPlayRepeat = setInterval(() => {
