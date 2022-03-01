@@ -56,7 +56,8 @@ body {
 
 .game-panel h1,
 .game-options h1,
-.game-initial h1 {
+.game-initial h1,
+.help-panel h1 {
       font-family: "Press Start 2P", cursive;
       font-size: 1.6rem;
       text-shadow: 3px 3px #000;
@@ -205,6 +206,33 @@ label {
       color: greenyellow;
       padding: 15px 30px;
       margin: 20px 0;
+}
+
+.help-panel {
+      background-color: #000;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      position: absolute;
+      top: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1;
+}
+
+.help-panel button {
+      background-color: gold;
+      padding: 10px 15px;
+      font-family: "Fredoka One", cursive;
+      border: 1px solid gold;
+      outline: none;
+}
+
+.help-panel button:focus {
+      background-color: #000;
+      color: gold;
 }
 
 #target {

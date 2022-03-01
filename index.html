@@ -27,7 +27,7 @@
       </head>
       <body>
             <div class="game-initial">
-                  <div class="row row justify-content-center">
+                  <div class="row justify-content-center">
                         <div class="col-lg-3 text-warning text-center mb-3">
                               <h1>Shoot the Duck!!!</h1>
                         </div>
@@ -80,7 +80,7 @@
 
             <div class="container-fluid">
                   <div class="row justify-content-center">
-                        <div class="game-options col-lg-3 text-center mb-3">
+                        <div class="game-options col-lg-3 text-center">
                               <div class="game-options-img">
                                     <img src="assets/img/duck.png" alt="duck-img" class="duck-img">
                                     <img src="assets/img/crosshair.png" alt="crosshair-img" class="crosshair-img">
@@ -92,13 +92,25 @@
                                     <label class="form-check-label" for="infinite-mode-switch">Modo infinito</label>
                               </div>
 
-                              <button class="help">Ajuda</button>
+                              <button class="help" id="help-button">Ajuda</button>
                               <div class="game-options-buttons">
                                     <button class="options-button" id="start">INICIAR</button>
                                     <button class="options-button" id="restart">REINICIAR</button>
                                     <button class="options-button" id="continue">CONTINUAR</button>
                                     <button class="options-button mt-5" id="reload">RECARREGAR O JOGO</button>
                               </div>
+                        </div>
+                  </div>
+            </div>
+
+            <div class="container-fluid">
+                  <div class="row justify-content-center">
+                        <div class="help-panel col-lg-3">
+                              <h1 class="text-warning mb-5">Shoot the Duck!!!</h1>
+                              <p>Clique ou toque na tela para atirar no pato. Cada acerto significa 10 pontos. Cada pato que você não acerta tira uma vida.</p>
+                              <p>Você tem 3 vidas. O jogo termina em 60 segundos. Você ganha se completar esse tempo sem perder todas as vidas.</p>
+                              <p>Com o  modo infinito ativado, você pode jogar sem perder vidas.</p>
+                              <button id="close-help">RETORNAR</button>
                         </div>
                   </div>
             </div>

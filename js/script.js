@@ -23,11 +23,14 @@ const infiniteModeMessage = document.querySelector(".infinite-mode");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
 const optionsBtn = document.getElementById("options-button");
+const helpBtn = document.getElementById("help-button");
 const startBtn = document.getElementById("start");
 const restartBtn = document.getElementById("restart");
 const continueBtn = document.getElementById("continue");
 const reloadBtn = document.getElementById("reload");
 const buttons = document.querySelectorAll("button");
+const helpPanel = document.querySelector(".help-panel");
+const closeHelp = document.getElementById("close-help");
 
 const reload = new Audio("assets/sounds/reload.mp3");
 const shot = new Audio("assets/sounds/shot.mp3");
@@ -70,6 +73,16 @@ function buttonSoundPlay() {
       });
 }
 
+// mostra a tela de ajuda
+function showHelp() {
+      helpPanel.style.display = "flex";
+}
+
+// esconde a tela de ajuda
+function hideHelp() {
+      helpPanel.style.display = "none";
+}
+
 // carrega tela principal do jogo
 function gameLoad() {
       if (this.id === "yes") gameSettings.soundOn = true;
@@ -83,6 +96,8 @@ function gameLoad() {
       background.style.opacity = "0.4";
       gameOptions.style.display = "flex";
       if (gameSettings.soundOn === true) buttonSoundPlay();
+      helpBtn.addEventListener("click", showHelp);
+      closeHelp.addEventListener("click", hideHelp);
       reloadBtn.addEventListener("click", reloadGame);
 }
 
