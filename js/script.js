@@ -21,6 +21,7 @@ const heart3 = document.getElementById("heart3");
 const infiniteModeMessage = document.querySelector(".infinite-mode");
 const sequence = document.getElementById("sequence");
 const points = document.getElementById("points");
+const optionsBtn = document.getElementById("options-button");
 const startBtn = document.getElementById("start");
 const restartBtn = document.getElementById("restart");
 const continueBtn = document.getElementById("continue");
@@ -33,6 +34,8 @@ const buttonSound = new Audio("assets/sounds/button.wav");
 
 let count = 0;
 let interval = 1000;
+let timeCountdown = null;
+let targetInterval = null;
 let gameStartSoundPlayRepeat = null;
 
 const gameSettings = {
@@ -75,6 +78,42 @@ function gameLoad() {
       background.style.opacity = "0.4";
       gameOptions.style.display = "flex";
       if (gameSettings.soundOn === true) buttonSoundPlay();
+}
+
+// reinicia o jogo
+function gameRestart() {
+      gameStats.score = 0;
+      gameStats.lives = 3;
+      gameStats.onSequence = false;
+      gameStats.shotBirdsInSequence = 0;
+      gameStats.timeLeft = 60;
+      heart1.style.display = "block";
+      heart2.style.display = "block";
+      heart3.style.display = "block";
+      gameOver.style.display = "none";
+      win.style.display = "none";
+
+      gameRun();
+}
+
+// carrega tela de opções durante o jogo
+function gameOptionsLoad() {
+      clearInterval(timeCountdown);
+      clearInterval(targetInterval);
+
+      if (gameSettings.soundOn === true) gameStartSoundPlay(true);
+      gameStartSoundPlayRepeat = setInterval(() => {
+            if (gameSettings.soundOn === true) gameStartSoundPlay(true);
+      }, 3000);
+
+      gamePanel.style.display = "none";
+      background.style.opacity = "0.4";
+      gameOptions.style.display = "flex";
+      startBtn.style.display = "none";
+      restartBtn.style.display = "block";
+      continueBtn.style.display = "block";
+
+      restartBtn.addEventListener("click", gameRestart);
 }
 
 // Mostra o alvo na tela
@@ -203,6 +242,13 @@ function infiniteModeOn() {
       infiniteModeMessage.style.display = "block";
 }
 
+// sem modo infinito
+function infiniteModeOff() {
+      hearts.style.display = "flex";
+      timeHeader.style.display = "block";
+      infiniteModeMessage.style.display = "none";
+}
+
 // roda o jogo
 function gameRun() {
       clearInterval(gameStartSoundPlayRepeat);
@@ -211,20 +257,25 @@ function gameRun() {
       gamePanel.style.display = "flex";
       gameOptions.style.display = "none";
       background.style.opacity = "1";
+      time.innerText = 60;
+      optionsBtn.addEventListener("click", gameOptionsLoad);
 
       if (infiniteModeSwitch.checked === true) {
             gameSettings.infiniteMode = true;
             infiniteModeOn();
+      } else {
+            gameSettings.infiniteMode = false;
+            infiniteModeOff();
       }
 
       background.addEventListener("click", shoot);
 
-      const timeCountdown = setInterval(() => {
+      timeCountdown = setInterval(() => {
             gameStats.timeLeft -= 1;
             time.innerText = gameStats.timeLeft;
       }, 1000);
 
-      const targetInterval = setInterval(() => {
+      targetInterval = setInterval(() => {
             massacre.style.display = "none";
             doubleMassacre.style.display = "none";
 
