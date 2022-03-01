@@ -89,11 +89,12 @@
                                     <img src="assets/img/crosshair.png" alt="crosshair-img" id="crosshair-img">
                               </div>
                               <h1 class="text-warning mb-5">Shoot the Duck!!!</h1>
-                              <h5>Selecione um modo de jogo:</h5>
-                              <select class="form-select form-select-lg" aria-label="Default select example">
-                                    <option selected>Modo normal</option>
-                                    <option value="1">Modo infinito</option>
-                              </select>
+
+                              <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="infinite-mode-switch">
+                                    <label class="form-check-label" for="infinite-mode-switch">Modo infinito</label>
+                              </div>
+
                               <button class="help">Ajuda</button>
                               <div class="game-options-buttons">
                                     <button class="options-button" id="start">INICIAR</button>

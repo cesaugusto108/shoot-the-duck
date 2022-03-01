@@ -13,6 +13,7 @@ const win = document.querySelector(".win");
 const gameOver = document.querySelector(".game-over");
 const gamePanel = document.querySelector(".game-panel");
 const gameOptions = document.querySelector(".game-options");
+const infiniteModeSwitch = document.getElementById("infinite-mode-switch");
 const hearts = document.querySelector(".hearts");
 const heart1 = document.getElementById("heart1");
 const heart2 = document.getElementById("heart2");
@@ -56,7 +57,7 @@ function gameStartSoundPlay(mode) {
 // toca o som dos botões
 function buttonSoundPlay() {
       const playButtonSound = () => buttonSound.play();
-      buttons.forEach(button => {
+      buttons.forEach((button) => {
             button.addEventListener("click", playButtonSound);
       });
 }
@@ -194,7 +195,7 @@ function hideHearts() {
       }
 }
 
-// modo infinito
+// estilo de modo infinito
 function infiniteModeOn() {
       hearts.style.display = "none";
       timeHeader.style.display = "none";
@@ -205,9 +206,14 @@ function infiniteModeOn() {
 function gameRun() {
       clearInterval(gameStartSoundPlayRepeat);
       gameStartSoundPlay(false);
+
       gamePanel.style.display = "flex";
       gameOptions.style.display = "none";
-      if (gameSettings.infiniteMode === true) infiniteModeOn();
+
+      if (infiniteModeSwitch.checked === true) {
+            gameSettings.infiniteMode = true;
+            infiniteModeOn();
+      }
 
       background.addEventListener("click", shoot);
 
