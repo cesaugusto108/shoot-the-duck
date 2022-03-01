@@ -72,6 +72,7 @@ function gameLoad() {
             if (gameSettings.soundOn === true) gameStartSoundPlay(true);
       }, 3000);
       background.style.display = "block";
+      background.style.opacity = "0.4";
       gameOptions.style.display = "flex";
       if (gameSettings.soundOn === true) buttonSoundPlay();
 }
@@ -209,6 +210,7 @@ function gameRun() {
 
       gamePanel.style.display = "flex";
       gameOptions.style.display = "none";
+      background.style.opacity = "1";
 
       if (infiniteModeSwitch.checked === true) {
             gameSettings.infiniteMode = true;

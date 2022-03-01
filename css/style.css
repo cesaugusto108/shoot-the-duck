@@ -192,4 +192,8 @@ label {
       .game-background {
             background-position: right;
       }
+
+      .game-options {
+            width: 90vw;
+      }
 }
