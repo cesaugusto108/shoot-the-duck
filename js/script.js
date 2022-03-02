@@ -283,7 +283,7 @@ function gameRun() {
       clearInterval(gameStartSoundPlayRepeat);
       gameStartSoundPlay(false);
 
-      gamePanel.style.display = "flex";
+      gamePanel.style.display = "block";
       gameOptions.style.display = "none";
       background.style.opacity = "1";
       time.innerText = 60;

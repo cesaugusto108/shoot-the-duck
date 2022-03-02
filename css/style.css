@@ -49,8 +49,14 @@ body {
       width: 100%;
       padding: 10px;
       display: none;
-      align-items: center;
+      flex-direction: column;
       cursor: default;
+}
+
+.game-panel-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
 
 .game-panel h1,
@@ -72,6 +78,7 @@ body {
 
 .hearts {
       display: flex;
+      justify-content: space-evenly;
 }
 
 .heart {
@@ -240,9 +247,18 @@ label {
 }
 
 /* AJUSTE PARA DISPOSITIVO MÓVEL */
-@media (max-width: 992px) {
+@media (max-width: 1181px) {
       .game-background {
             background-position: right;
+      }
+
+      .game-panel-inner {
+            flex-direction: column;
+            align-items: center;
+      }
+
+      .hearts {
+            width: 100vw;
       }
 
       .game-options {
@@ -254,5 +270,61 @@ label {
             left: 0;
             transform: translateX(0);
             justify-content: center;
+      }
+}
+
+@media (max-height: 541px) {
+      .game-panel {
+            padding: 4px;
+      }
+
+      .game-panel h1,
+      .game-options h1,
+      .game-initial h1,
+      .help-panel h1,
+      .game-panel h2,
+      .game-panel h3 {
+            font-size: 0.8rem;
+            margin-bottom: 0;
+      }
+
+      .game-panel-inner {
+            flex-direction: row;
+      }
+
+      .hearts {
+            width: 100%;
+      }
+
+      .heart {
+            font-size: 1rem;
+      }
+
+      .massacre,
+      .double_massacre,
+      .win,
+      .game-over {
+            font-size: 3rem;
+      }
+
+      .game-options {
+            padding: 10px;
+      }
+
+      .game-options-buttons {
+            margin: 0;
+      }
+
+      .game-options-buttons button,
+      .help {
+            padding: 0;
+      }
+
+      .options-button {
+            font-size: 1.3rem;
+      }
+
+      #reload {
+            font-size: 0.8rem;
       }
 }
