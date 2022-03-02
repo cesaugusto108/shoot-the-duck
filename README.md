@@ -1,2 +1,2 @@
 # shoot-the-duck
-Joguinho feito em HTML, CSS, Javascript
+Pequeno jogo feito em HTML, CSS, Javascript. Com sons, tela de opções, ajuda, modo normal e "infinito" (não perde vidas).
